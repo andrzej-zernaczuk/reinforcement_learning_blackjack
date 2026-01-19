@@ -266,7 +266,7 @@ def main() -> None:
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--algo", choices=["doubleq", "a2c"], required=True)
-    parser.add_argument("--reward", choices=["r0", "r1", "r2", "r3"], default="r0")
+    parser.add_argument("--reward", choices=["r0", "r1", "r2"], default="r0")
     parser.add_argument("--seed", type=int, default=0)
 
     parser.add_argument("--natural", action="store_true")

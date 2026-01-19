@@ -25,10 +25,6 @@ pip install uv
 ## Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd reinforcement_learning
-
 # Install dependencies (creates virtual environment automatically)
 uv sync
 
@@ -97,16 +93,33 @@ Results are saved to `results/<algo>_<reward>_seed<N>_<timestamp>/`:
 - `metrics.csv` - Training and evaluation metrics
 - `figures/policy_*.png` - Policy visualization heatmaps
 
+## Course Project Notes (Scope + What To Check)
+
+This repository is set up to be "good for project purposes" rather than production-ready.
+If you are grading or presenting the project, these are the key points to verify:
+
+- Reproducibility: all scripts take `--seed` and save `config.json` per run.
+- Fair evaluation: evaluation always uses true (unshaped) rewards.
+- Reward shaping: includes baseline and two penalties for shorter or safer play.
+- Evidence: training logs (`metrics.csv`), policy heatmaps, and aggregate reports in `analysis/`.
+- Minimal runtime: small runs in the Quick Start finish quickly; longer runs are optional.
+
+If you already ran experiments, point reviewers to:
+- `results/` for raw run outputs
+- `analysis/` for summaries and figures
+
+Current best result (from `analysis/report.md` in this repo):
+- **A2C with r1** (mean eval return -0.0509), slightly ahead of DoubleQ r1 (-0.0528)
+
 ### Reward Shaping Modes
 
-The project supports four reward modes for exploring different learning objectives:
+The project supports three reward modes for exploring different learning objectives:
 
 | Mode | Description | Parameters |
 |------|-------------|------------|
 | `r0` | **Baseline** - Original environment rewards | None |
 | `r1` | **Step penalty** - Encourages shorter episodes | `--step_penalty 0.01` |
 | `r2` | **Bust penalty** - Extra penalty for losing/busting | `--bust_penalty 0.5` |
-| `r3` | **Potential-based shaping** - Uses hand value potential | `--gamma 0.99` |
 
 Example with reward shaping:
 
@@ -222,16 +235,6 @@ A **policy gradient** method that learns both a policy (actor) and value functio
 - Sample inefficient compared to off-policy methods
 - Sensitive to hyperparameters
 - Requires more tuning than tabular methods
-
-### Reward Shaping Theory
-
-**Potential-based shaping** (mode `r3`) is theoretically sound - it transforms rewards using a potential function Φ(s) without changing the optimal policy:
-
-```
-r'(s, a, s') = r(s, a, s') + γ·Φ(s') - Φ(s)
-```
-
-For Blackjack, we use `Φ(s) = player_sum / 21`, providing denser feedback about hand quality while preserving optimality guarantees (Ng et al., 1999).
 
 ## Common Options
 
