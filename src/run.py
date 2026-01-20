@@ -193,7 +193,7 @@ def train_a2c(
 
     environment.close()
 
-    # ---- SAVE CHECKPOINT (NEW) ----
+    # Save checkpoints
     if checkpoint_path is None:
         checkpoint_path = output_dir / "checkpoint_a2c.pt"
     # Ensure parent dir exists (in case user passes e.g. checkpoints/...)
@@ -257,7 +257,7 @@ def main() -> None:
     # Output directory
     parser.add_argument("--outdir", type=str, default="results")
 
-    # NEW: optional checkpoint output (mainly for A2C; ignored for DoubleQ)
+    # Optional checkpoint output (for A2C; ignored for DoubleQ)
     parser.add_argument("--checkpoint", type=str, default="")
 
     args = parser.parse_args()
