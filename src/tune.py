@@ -167,7 +167,7 @@ def tune_a2c(args) -> None:
         Returns:
             A2CConfig with randomly sampled hyperparameters.
         """
-        # Use log-uniform sampling for learning rate to explore different scales
+        # Log-uniform used for sampling for learning rate to explore different scales
         learning_rate = 10 ** random_generator.uniform(math.log10(1e-4), math.log10(3e-3))
         hidden_sizes = random_generator.choice([(64, 64), (128, 128)])
         gamma = random_generator.choice([0.95, 0.99])
