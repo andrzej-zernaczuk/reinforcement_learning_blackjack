@@ -1,0 +1,10 @@
+{
+  "entropy_coef": 0.01,
+  "gae_lambda": 0.97,
+  "gamma": 0.99,
+  "hidden1": 64,
+  "hidden2": 64,
+  "lr": 0.001,
+  "mean_eval_return": -0.048749999999999995,
+  "trial": 63
+}
